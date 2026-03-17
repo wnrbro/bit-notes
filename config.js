@@ -12,7 +12,7 @@
  */
 
 const SUPABASE_URL  = 'https://kxdytjuvvphmdiycbqcb.supabase.co';
-const SUPABASE_ANON = '42d04438-37e2-468f-a71d-223072b3b1cb';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt4ZHl0anV2dnBobWRpeWNicWNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NjQ3MTgsImV4cCI6MjA4OTM0MDcxOH0.7WRTY-84ISiu_M4WxfsTg2PiY-_e6Fvs9sUJAkRPcZA';
 
 /**
  * Admin Panel Password
