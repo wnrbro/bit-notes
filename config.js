@@ -20,7 +20,7 @@ const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFz
  * Change this to something unique before deploying.
  * This is a lightweight gate — upgrade to Supabase Auth for production.
  */
-const ADMIN_PASSWORD = 'admin@BIT2024';
+const ADMIN_PASSWORD = '123';
 
 /**
  * Storage bucket name (must match what you create in Supabase Storage)
