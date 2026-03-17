@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Viewing Note — BIT Lecture Notes</title>
+  <meta name="description" content="View BIT lecture notes in an online PDF reader." />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#05080f" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📄</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* Prevent body scroll so iframe fills viewport */
+    body { overflow: hidden; }
+    .viewer-frame-wrap iframe { display: none; }
+    /* Transparent overlay to block right-click on PDF frame (cross-origin limited) */
+    .viewer-frame-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body oncontextmenu="return false;">
+  <div class="viewer-layout">
+
+    <!-- ════════════ VIEWER HEADER ════════════ -->
+    <header class="viewer-header">
+      <a href="index.html" class="viewer-back-btn" aria-label="Back to notes list">
+        ← Back
+      </a>
+
+      <div class="viewer-info">
+        <div class="viewer-note-title" id="viewer-note-title">Loading note…</div>
+        <div class="viewer-note-meta" id="viewer-note-meta"></div>
+      </div>
+
+      <div class="viewer-controls">
+        <span class="vip-badge">⭐ VIP Download</span>
+        <button class="btn-download" id="btn-download" aria-label="Download PDF (VIP required)">
+          <span>🔒</span> Download PDF
+        </button>
+      </div>
+    </header>
+
+    <!-- ════════════ PDF VIEWER ════════════ -->
+    <div class="viewer-frame-wrap">
+      <div class="viewer-loading" id="viewer-loading">
+        <div class="loader"></div>
+        <p style="color:var(--text-muted); font-size:0.88rem; margin-top:0.5rem;">Loading PDF…</p>
+      </div>
+      <iframe
+        id="viewer-frame"
+        title="PDF Viewer"
+        allowfullscreen
+        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation"
+      ></iframe>
+    </div>
+  </div>
+
+  <!-- ════════════ VIP CODE MODAL ════════════ -->
+  <div class="modal-overlay" id="code-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal">
+      <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+      <div class="modal-icon">⭐</div>
+      <h2 id="modal-title">Unlock PDF Download</h2>
+      <p class="modal-sub">
+        Enter your unique VIP code to download this note.<br/>
+        Each code is one-time-use only and cannot be reused.
+      </p>
+
+      <div class="input-group">
+        <label for="vip-code-input">VIP Code</label>
+        <input
+          id="vip-code-input"
+          type="text"
+          placeholder="BIT-XXXX-XXXX"
+          maxlength="13"
+          autocomplete="off"
+          spellcheck="false"
+        />
+      </div>
+
+      <button class="btn-primary" id="btn-redeem">Unlock Download</button>
+
+      <div class="modal-feedback" id="modal-feedback" style="display:none;"></div>
+
+      <a class="vip-info-link" id="vip-info-toggle" role="button" tabindex="0">
+        ❓ How to get a VIP Code?
+      </a>
+
+      <div class="vip-info-panel" id="vip-info-panel">
+        <h4>📍 How to Get a VIP Code</h4>
+        <p>Pay <strong>Rs 100</strong> at any of the following points:</p>
+        <ul>
+          <li>📞 Contact: <strong>+94 7X XXX XXXX</strong></li>
+          <li>📍 Faculty Notice Board — BIT Department</li>
+          <li>💬 WhatsApp: <strong>BIT Notes VIP Group</strong></li>
+        </ul>
+        <p style="margin-top:0.5rem;">Code delivered after payment confirmation.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ TOAST ════════════ -->
+  <div class="toast" id="toast" role="alert" aria-live="assertive"></div>
+
+  <!-- ════════════ SCRIPTS ════════════ -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/viewer.js"></script>
+</body>
+</html>

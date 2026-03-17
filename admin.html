@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel — BIT Lecture Notes</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#05080f" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="admin-layout">
+
+    <!-- ════════════ NAVBAR ════════════ -->
+    <nav class="navbar">
+      <a href="index.html" class="navbar-logo">
+        <div class="navbar-logo-icon">📚</div>
+        <div class="navbar-logo-text">
+          BIT Notes
+          <span>Admin Panel</span>
+        </div>
+      </a>
+      <div class="navbar-actions" style="margin-left:auto;">
+        <a href="index.html" class="btn-admin">← Back to Site</a>
+      </div>
+    </nav>
+
+    <!-- ════════════ LOGIN GATE ════════════ -->
+    <div id="login-wrap" class="admin-login-wrap">
+      <div class="admin-login-card">
+        <div style="font-size:2.5rem; margin-bottom:1rem;">🔐</div>
+        <h2>Admin Access</h2>
+        <p>Enter the admin password to continue</p>
+
+        <div class="input-group" style="text-align:left; margin-top:1.5rem;">
+          <label for="admin-password">Password</label>
+          <input
+            id="admin-password"
+            type="password"
+            placeholder="Enter admin password"
+            autocomplete="current-password"
+          />
+        </div>
+        <button class="btn-primary" id="btn-login" style="margin-top:0.5rem;">Login →</button>
+        <div id="login-error" style="margin-top:0.75rem; font-size:0.82rem; color:var(--accent-red); min-height:1rem;"></div>
+      </div>
+    </div>
+
+    <!-- ════════════ ADMIN PANEL ════════════ -->
+    <div id="admin-panel" class="admin-panel">
+      <div class="admin-grid">
+
+        <!-- ── Upload New Note ── -->
+        <div class="admin-card">
+          <div class="admin-card-title"><span>📤</span> Upload New Note</div>
+          <form id="upload-form" novalidate>
+
+            <div class="form-field">
+              <label for="note-title">Note Title *</label>
+              <input id="note-title" type="text" placeholder="e.g. Introduction to Java Programming" required />
+            </div>
+
+            <div class="form-field">
+              <label for="note-subject">Subject Name *</label>
+              <input id="note-subject" type="text" placeholder="e.g. Object Oriented Programming" required />
+            </div>
+
+            <div class="form-field">
+              <label for="note-module">Module Code</label>
+              <input id="note-module" type="text" placeholder="e.g. CS2201 (optional)" />
+            </div>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label for="note-year">Year *</label>
+                <select id="note-year" required>
+                  <option value="">Select Year</option>
+                  <option value="1">1st Year</option>
+                  <option value="2">2nd Year</option>
+                  <option value="3">3rd Year</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="note-semester">Semester *</label>
+                <select id="note-semester" required>
+                  <option value="">Select Semester</option>
+                  <option value="1">Semester 1</option>
+                  <option value="2">Semester 2</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label>PDF File * <span style="color:var(--text-muted);font-weight:400;">(max 50 MB)</span></label>
+              <div class="file-input-wrap">
+                <input id="pdf-file" type="file" accept="application/pdf" required />
+                <p>📁 <span>Choose PDF</span> or drag &amp; drop here</p>
+                <div id="file-name-display" class="file-name-display"></div>
+              </div>
+            </div>
+
+            <!-- Upload Progress -->
+            <div class="upload-progress" id="upload-progress">
+              <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progress-fill"></div>
+              </div>
+              <div class="progress-label" id="progress-label">0%</div>
+            </div>
+
+            <div class="modal-feedback" id="upload-feedback" style="margin-top:0.5rem; display:none;"></div>
+
+            <button class="btn-success" id="btn-upload" type="submit">📤 Upload Note</button>
+          </form>
+        </div>
+
+        <!-- ── Generate VIP Codes ── -->
+        <div class="admin-card">
+          <div class="admin-card-title"><span>⭐</span> Generate VIP Codes</div>
+
+          <div class="form-field">
+            <label for="code-count">Number of codes to generate</label>
+            <input id="code-count" type="number" value="10" min="1" max="100" />
+          </div>
+
+          <button class="btn-gold" id="btn-generate">⚡ Generate Codes</button>
+
+          <div style="margin-top:1.5rem;">
+            <div style="font-size:0.72rem; font-weight:700; color:var(--text-secondary); margin-bottom:0.5rem; text-transform:uppercase; letter-spacing:0.07em; font-family:var(--font-display);">
+              Generated Codes <span style="color:var(--text-muted); font-weight:400; text-transform:none;">(click 📋 to copy)</span>
+            </div>
+            <div class="codes-list" id="codes-output">
+              <div style="color:var(--text-muted);font-size:0.85rem;padding:0.5rem;">Generate codes to see them here.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Uploaded Notes ── -->
+        <div class="admin-card" style="grid-column: 1 / -1;">
+          <div class="admin-card-title" style="justify-content:space-between;">
+            <span><span>📚</span> Uploaded Notes</span>
+            <button onclick="loadNotesList()" class="btn-admin" style="font-size:0.73rem;">↻ Refresh</button>
+          </div>
+          <div class="notes-admin-list" id="notes-admin-list">
+            <!-- Injected by admin.js -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ════════════ TOAST ════════════ -->
+  <div class="toast" id="toast" role="alert" aria-live="assertive"></div>
+
+  <!-- ════════════ SCRIPTS ════════════ -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

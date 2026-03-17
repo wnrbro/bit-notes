@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BIT Lecture Notes — Your Ultimate Study Hub</title>
+  <meta name="description" content="Browse and access BIT lecture notes by year and semester. VIP members can download high-quality PDFs." />
+  <meta name="theme-color" content="#05080f" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ════════════ NAVIGATION ════════════ -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="navbar-logo" aria-label="BIT Notes Home">
+      <div class="navbar-logo-icon">📚</div>
+      <div class="navbar-logo-text">
+        BIT Notes
+        <span>Lecture Repository</span>
+      </div>
+    </a>
+
+    <div class="navbar-search">
+      <span class="navbar-search-icon">🔍</span>
+      <input
+        id="search-input"
+        type="search"
+        placeholder="Search by subject, module code…"
+        aria-label="Search notes"
+        autocomplete="off"
+      />
+    </div>
+
+    <div class="navbar-actions">
+      <button id="nav-vip-btn" class="navbar-vip-badge" aria-label="Redeem VIP code">
+        ⭐ VIP Access
+      </button>
+      <a href="admin.html" class="btn-admin">⚙️ Admin</a>
+    </div>
+  </nav>
+
+  <!-- ════════════ HERO ════════════ -->
+  <section class="hero">
+    <div class="hero-eyebrow">🎓 BIT Degree Programme</div>
+    <h1>Your <span class="gradient-text">Study Hub</span><br />for Lecture Notes</h1>
+    <p class="hero-sub">Access high-quality notes organised by year &amp; semester. VIP members unlock PDF downloads.</p>
+  </section>
+
+  <!-- ════════════ STATS ════════════ -->
+  <div class="stats-strip" aria-label="Repository statistics">
+    <div class="stat-item">
+      <span class="stat-value" id="stat-notes">—</span>
+      <span class="stat-label">Notes</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-value">3</span>
+      <span class="stat-label">Years</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-value">6</span>
+      <span class="stat-label">Semesters</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-value">Rs 100</span>
+      <span class="stat-label">VIP Access</span>
+    </div>
+  </div>
+
+  <!-- ════════════ FILTER BAR ════════════ -->
+  <div class="filter-bar" role="group" aria-label="Filter notes">
+    <div class="filter-group">
+      <span class="filter-label">Year</span>
+      <div class="filter-pills">
+        <button class="pill active" data-year="all">All</button>
+        <button class="pill" data-year="1">1st</button>
+        <button class="pill" data-year="2">2nd</button>
+        <button class="pill" data-year="3">3rd</button>
+      </div>
+    </div>
+    <div class="filter-divider" role="separator"></div>
+    <div class="filter-group">
+      <span class="filter-label">Semester</span>
+      <div class="filter-pills">
+        <button class="pill active" data-sem="all">All</button>
+        <button class="pill" data-sem="1">Sem 1</button>
+        <button class="pill" data-sem="2">Sem 2</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ NOTES GRID ════════════ -->
+  <main class="main-container">
+    <div class="section-header">
+      <h2 class="section-title">📖 Available Notes</h2>
+      <span class="result-count" id="result-count" aria-live="polite">Loading…</span>
+    </div>
+    <div class="notes-grid" id="notes-grid" aria-label="Lecture notes">
+      <!-- Cards injected by app.js -->
+    </div>
+  </main>
+
+  <!-- ════════════ VIP CODE MODAL ════════════ -->
+  <div class="modal-overlay" id="code-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal">
+      <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+      <div class="modal-icon">⭐</div>
+      <h2 id="modal-title">Redeem VIP Code</h2>
+      <p class="modal-sub">
+        Enter your unique 8-character code to unlock PDF downloads.<br/>
+        Each code can only be used once.
+      </p>
+
+      <div class="input-group">
+        <label for="vip-code-input">Your Code</label>
+        <input
+          id="vip-code-input"
+          type="text"
+          placeholder="BIT-XXXX-XXXX"
+          maxlength="13"
+          autocomplete="off"
+          spellcheck="false"
+        />
+      </div>
+
+      <button class="btn-primary" id="btn-redeem">Unlock Download</button>
+
+      <div class="modal-feedback" id="modal-feedback" style="display:none;"></div>
+
+      <a class="vip-info-link" id="vip-info-toggle" role="button" tabindex="0">
+        ❓ How to get a VIP Code?
+      </a>
+
+      <div class="vip-info-panel" id="vip-info-panel">
+        <h4>📍 How to Get a VIP Code</h4>
+        <p>Pay <strong>Rs 100</strong> at any of the following points to receive your unique code:</p>
+        <ul>
+          <li>📞 Contact: <strong>+94 7X XXX XXXX</strong></li>
+          <li>📍 Faculty Notice Board — BIT Department</li>
+          <li>💬 WhatsApp Group: <strong>BIT Notes VIP</strong></li>
+        </ul>
+        <p style="margin-top:0.5rem;">Your code will be delivered after payment confirmation.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ TOAST ════════════ -->
+  <div class="toast" id="toast" role="alert" aria-live="assertive"></div>
+
+  <!-- ════════════ SCRIPTS ════════════ -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
