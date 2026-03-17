@@ -11,8 +11,8 @@
  *    NEVER paste your service_role key here.
  */
 
-const SUPABASE_URL  = 'https://YOUR_PROJECT_ID.supabase.co';
-const SUPABASE_ANON = 'YOUR_ANON_KEY_HERE';
+const SUPABASE_URL  = 'https://kxdytjuvvphmdiycbqcb.supabase.co';
+const SUPABASE_ANON = '42d04438-37e2-468f-a71d-223072b3b1cb';
 
 /**
  * Admin Panel Password
